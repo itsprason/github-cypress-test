@@ -23,4 +23,14 @@ jobs:
         with:
           name: cypress-videos
           path: cypress/videos
+          
+        # Send notification to Teams on failure
+      - name: Send Teams notification on failure
+        if: failure()
+        env:
+          WEBHOOK_URL: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK }}
+        run: |
+          curl -H "Content-Type: application/json" -d '{
+            "text": "Cypress tests failed."
+          }' $WEBHOOK_URL
 
