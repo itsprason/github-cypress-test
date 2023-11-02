@@ -1,7 +1,7 @@
 describe('template spec', () => {
   it('passes', () => {
     //navigate to the C playground
-    cy.visit('https://programiz.pro/ide/c')
+    cy.visit('https://programiz.prmmmmo/ide/c')
 
     //need to wait for the button click to work
     cy.wait(2000)
