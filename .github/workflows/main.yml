@@ -1,5 +1,7 @@
 name: End-to-end tests
-on: push
+on:
+  schedule:
+    - cron: '0 * * * *'
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
@@ -31,6 +33,6 @@ jobs:
           WEBHOOK_URL: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK }}
         run: |
           curl -H "Content-Type: application/json" -d '{
-            "text": "Cypress tests failed."
+            "text": "Cypress test failed."
           }' $WEBHOOK_URL
 
