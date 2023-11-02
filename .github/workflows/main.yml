@@ -23,5 +23,4 @@ jobs:
         with:
           name: cypress-videos
           path: cypress/videos
-          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
 
