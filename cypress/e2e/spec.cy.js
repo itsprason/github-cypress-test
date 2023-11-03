@@ -15,13 +15,8 @@ describe('template spec', () => {
 
     cy.wait(2000)
 
-       // Use Cypress assertions to check if the output shows up
-       cy.get('.xterm-rows').should('contain', 'Hello, World!').then(() => {
-        cy.log('Test pass');
-      }).catch(() => {
-        cy.log('Test failed');
-        throw new Error("test fails here")
-      });
+    cy.get('.xterm-rows').should('contain', 'Hello, World!');
+
      });
  
 
