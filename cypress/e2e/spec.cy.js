@@ -3,7 +3,7 @@ const WEBHOOK_URL = process.env.WEBHOOK_URL
 describe('template spec', () => {
   it('passes', () => {
     //navigate to the C playground
-    cy.visit('https://programizzzzzzzzzzzzzzz.pro/ide/c')
+    cy.visit('https://programiz.pro/ide/c')
 
     //need to wait for the button click to work
     cy.wait(2000)
