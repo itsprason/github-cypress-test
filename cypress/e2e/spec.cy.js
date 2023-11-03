@@ -13,7 +13,7 @@ describe('template spec', () => {
     cy.get('button').contains('Run').click()
     //wait for 2 seconds for the execution to complete
 
-    cy.wait(2000)
+    cy.wait(1)
 
     //condition to check if the output shows up
     if (cy.get('.xterm-rows').contains('Hello, World!')) {
