@@ -15,31 +15,17 @@ describe('template spec', () => {
 
     cy.wait(1)
 
-    //condition to check if the output shows up
-    if (cy.get('.xterm-rows').contains('Hello, World!')) {
-      cy.log('test pass')
-    }
-    else {
-      cy.log('Test failed');
-      //send notification to Teams
-//       const command = `curl -H "Content-Type: application/json" -d '{
-//   "text": "Cypress test failed."
-// }' ${WEBHOOK_URL}`;
-
-      // exec(command, (error, stdout, stderr) => {
-      //   if (error) {
-      //     console.error('Error:', error);
-      //     return;
-      //   }
-
-      //   if (stderr) {
-      //     console.error('Error:', stderr);
-      //   } else {
-      //     console.log('Notification sent successfully:', stdout);
-      //   }
-      // });
-      cy.fail()
-    }
+       // Use Cypress assertions to check if the output shows up
+       cy.get('.xterm-rows').should('contain', 'Hello, World!')
+       .then(() => {
+         cy.log('Test pass');
+       })
+       .catch(() => {
+         cy.log('Test failed');
+         cy.fail();
+       });
+   });
+ 
 
   })
-})
+
