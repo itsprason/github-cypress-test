@@ -1,5 +1,3 @@
-const { exec } = require('child_process');
-const WEBHOOK_URL = process.env.WEBHOOK_URL
 describe('template spec', () => {
   it('passes', () => {
     //navigate to the C playground
@@ -11,11 +9,9 @@ describe('template spec', () => {
     //find run button and hit click
 
     cy.get('button').contains('Run').click()
-    //wait for 2 seconds for the execution to complete
 
-    cy.wait(1)
 
-    cy.get('.xterm-rows').should('contain', 'Hello, World!');
+    cy.get('.xterm-rows',{ timeout: 3000 }).should('contain', 'Hello, World!');
 
      });
  
