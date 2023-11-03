@@ -21,22 +21,23 @@ describe('template spec', () => {
     }
     else {
       //send notification to Teams
-      const command = `curl -H "Content-Type: application/json" -d '{
-  "text": "Cypress test failed."
-}' ${WEBHOOK_URL}`;
+//       const command = `curl -H "Content-Type: application/json" -d '{
+//   "text": "Cypress test failed."
+// }' ${WEBHOOK_URL}`;
 
-      exec(command, (error, stdout, stderr) => {
-        if (error) {
-          console.error('Error:', error);
-          return;
-        }
+      // exec(command, (error, stdout, stderr) => {
+      //   if (error) {
+      //     console.error('Error:', error);
+      //     return;
+      //   }
 
-        if (stderr) {
-          console.error('Error:', stderr);
-        } else {
-          console.log('Notification sent successfully:', stdout);
-        }
-      });
+      //   if (stderr) {
+      //     console.error('Error:', stderr);
+      //   } else {
+      //     console.log('Notification sent successfully:', stdout);
+      //   }
+      // });
+      cy.fail()
     }
 
   })
