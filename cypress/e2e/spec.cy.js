@@ -14,7 +14,7 @@ describe('template spec', () => {
     cy.wait(2000)
 
     //condition to check if the output shows up
-    if (cy.get('.xterm-rows').contains('Hello, World!')) {
+    ifk (cy.get('.xterm-rows').contains('Hello, World!')) {
       cy.log('test pass')
     }
     else {
