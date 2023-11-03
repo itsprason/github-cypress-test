@@ -11,7 +11,7 @@ describe('template spec', () => {
     cy.get('button').contains('Run').click()
 
 
-    cy.get('.xterm-rows',{ timeout: 2000 }).should('contain', 'Hello, World!');
+    cy.get('.xterm-rows',{ timeout: 1 }).should('contain', 'Hello, World!');
 
      });
  
