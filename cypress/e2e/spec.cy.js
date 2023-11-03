@@ -1,3 +1,5 @@
+const { exec } = require('child_process');
+const WEBHOOK_URL = process.env.WEBHOOK_URL
 describe('template spec', () => {
   it('passes', () => {
     //navigate to the C playground
@@ -19,6 +21,22 @@ describe('template spec', () => {
     }
     else {
       //send notification to Teams
+      const command = `curl -H "Content-Type: application/json" -d '{
+  "text": "Cypress test failed."
+}' ${WEBHOOK_URL}`;
+
+      exec(command, (error, stdout, stderr) => {
+        if (error) {
+          console.error('Error:', error);
+          return;
+        }
+
+        if (stderr) {
+          console.error('Error:', stderr);
+        } else {
+          console.log('Notification sent successfully:', stdout);
+        }
+      });
     }
 
   })
