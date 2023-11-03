@@ -20,6 +20,7 @@ describe('template spec', () => {
       cy.log('test pass')
     }
     else {
+      cy.log('Test failed');
       //send notification to Teams
 //       const command = `curl -H "Content-Type: application/json" -d '{
 //   "text": "Cypress test failed."
