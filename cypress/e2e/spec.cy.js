@@ -20,7 +20,7 @@ describe('template spec', () => {
         cy.log('Test pass');
       }).catch(() => {
         cy.log('Test failed');
-        cy.fail('The test has failed.');
+        throw new Error("test fails here")
       });
      });
  
