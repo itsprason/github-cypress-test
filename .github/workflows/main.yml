@@ -27,12 +27,28 @@ jobs:
           if-no-files-found: ignore 
           
         # Send notification to Teams on failure
-      - name: Send Teams notification on failure
+      - name: 📣 Send teams notification
+        uses: simbo/msteams-message-card-action@latest
         if: failure()
-        env:
-          WEBHOOK_URL: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK }}
-        run: |
-          curl -H "Content-Type: application/json" -d '{
-            "text": "Action failed."
-          }' $WEBHOOK_URL
-
+        with:
+          webhook: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK }}
+          title: Cypress Test Failed!
+          color: ff69b4
+          buttons: |
+            Click here! https://programiz.pro/foo/
+          sections: |
+            -
+              facts:
+                -
+                  name: "Board:"
+                  value: Name of board
+                -
+                  name: "List:"
+                  value: Name of list
+                -
+                  name: "Assigned to:"
+                  value: (none)
+                -
+                  name: "Due date:"
+                  value: (none)
+              text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
