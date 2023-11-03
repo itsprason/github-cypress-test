@@ -27,8 +27,7 @@ jobs:
           if-no-files-found: ignore 
           
         # Send notification to Teams on failure
-      - name: 📣 Send teams notification
-        uses: simbo/msteams-message-card-action@latest
+      - uses: simbo/msteams-message-card-action@latest
         with:
           webhook: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK }}
           title: Hello world!
