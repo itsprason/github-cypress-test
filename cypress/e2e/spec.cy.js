@@ -1,7 +1,7 @@
 describe('template spec', () => {
   it('passes', () => {
     //navigate to the C playground
-    cy.visit('https://programiz.prwo/ide/c')
+    cy.visit('https://programiz.pro/ide/c')
 
     //need to wait for the button click to work
     cy.wait(2000)
@@ -14,7 +14,7 @@ describe('template spec', () => {
     cy.wait(2000)
 
     //condition to check if the output shows up
-    ifk (cy.get('.xterm-rows').contains('Hello, World!')) {
+    if (cy.get('.xterm-rows').contains('Hello, World!')) {
       cy.log('test pass')
     }
     else {
