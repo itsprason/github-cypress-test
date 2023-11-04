@@ -33,7 +33,8 @@ jobs:
           WEBHOOK_URL: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK }}
         run: |
           timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-          message=""
+          uri="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          message="It appears that the Cypress test has encountered a failure."
 
           payload='{
             "@type": "MessageCard",
@@ -58,7 +59,7 @@ jobs:
                 "targets": [
                   {
                     "os": "default",
-                    "uri": "'"$message"'"
+                    "uri": "'"$uri"'"
                   }
                 ]
               }
