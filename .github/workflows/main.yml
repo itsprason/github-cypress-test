@@ -32,6 +32,37 @@ jobs:
         env:
           WEBHOOK_URL: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK }}
         run: |
-          curl -H "Content-Type: application/json" -d '{
-            "text": "Cypress Test Failed. \n ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          }' $WEBHOOK_URL
+          timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          message="Cypress Test Failed. \n ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+          payload='{
+            "@type": "MessageCard",
+            "@context": "http://schema.org/extensions",
+            "themeColor": "FF0000",
+            "title": "Cypress Test Failed",
+            "text": "'"$message"'",
+            "sections": [
+              {
+                "facts": [
+                  {
+                    "name": "Timestamp",
+                    "value": "'"$timestamp"'"
+                  }
+                ]
+              }
+            ],
+            "potentialAction": [
+              {
+                "@type": "OpenUri",
+                "name": "View Details",
+                "targets": [
+                  {
+                    "os": "default",
+                    "uri": "'"$message"'"
+                  }
+                ]
+              }
+            ]
+          }'
+
+          curl -H "Content-Type: application/json" -d "$payload" $WEBHOOK_URL
