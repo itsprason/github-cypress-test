@@ -33,5 +33,5 @@ jobs:
           WEBHOOK_URL: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK }}
         run: |
           curl -H "Content-Type: application/json" -d '{
-            "text": "Action failed."
+            "text": "Cypress Test Failed. \n https://github.com/${{github.repository}}/commit/${{github.sha}}/checks/${{github.run_id}}"
           }' $WEBHOOK_URL
