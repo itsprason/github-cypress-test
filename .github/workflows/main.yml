@@ -33,7 +33,7 @@ jobs:
           WEBHOOK_URL: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK }}
         run: |
           timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-          message="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          message=""
 
           payload='{
             "@type": "MessageCard",
