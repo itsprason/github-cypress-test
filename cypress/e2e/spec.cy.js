@@ -4,10 +4,9 @@ describe('template spec', () => {
     cy.visit('https://programiz.pro/ide/c')
 
     //need to wait for the button click to work
-    cy.wait(2000)
+    cy.wait(3000)
 
     //find run button and hit click
-
     cy.get('button').contains('Run').click()
 
 
