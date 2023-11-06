@@ -1,0 +1,73 @@
+# This workflow will perform cypress test against c compiler and notify if test fails.
+name: Cypress Testty
+on:
+  schedule:
+      - cron: '*/30 * * * *'
+jobs:
+  cypress-run:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+        # Run cypress test
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+
+        # Upload image to Artifact if test fails
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore
+      
+        # Upload video to Artifact if test fails
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore
+
+        # Send notification to Teams on failure
+      - name: Send Teams notification on failure
+        if: failure()
+        env:
+          WEBHOOK_URL: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK }}
+        run: |
+          timestamp=$(TZ="Asia/Kathmandu" date +'%Y-%m-%d %H:%M:%S')
+          uri="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          message="It appears that the Cypress test has encountered a failure."
+
+          payload='{
+            "@type": "MessageCard",
+            "@context": "http://schema.org/extensions",
+            "themeColor": "FF0000",
+            "title": "Cypress Test Failed",
+            "text": "'"$message"'",
+            "sections": [
+              {
+                "facts": [
+                  {
+                    "name": "Timestamp",
+                    "value": "'"$timestamp"'"
+                  }
+                ]
+              }
+            ],
+            "potentialAction": [
+              {
+                "@type": "OpenUri",
+                "name": "View Details",
+                "targets": [
+                  {
+                    "os": "default",
+                    "uri": "'"$uri"'"
+                  }
+                ]
+              }
+            ]
+          }'
+
+          curl -H "Content-Type: application/json" -d "$payload" $WEBHOOK_URL
