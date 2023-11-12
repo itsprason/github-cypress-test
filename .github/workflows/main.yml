@@ -1,7 +1,7 @@
 name: End-to-end tests
 on: 
   schedule:
-      - cron: '*/15 * * * *'
+      - cron: '*/10 * * * *'
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
@@ -48,7 +48,7 @@ jobs:
               {
                 "facts": [
                   {
-                    "name": "Timestamp",
+                    "name": "Timestamp | Prason",
                     "value": "'"$timestamp"'"
                   }
                 ]
